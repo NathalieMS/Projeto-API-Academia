@@ -52,28 +52,31 @@ class AparelhosDAO{
         })
     }
 
-    //aqui eu faço a seleção por manutencao
-    // pegaAparelhoManutencao(datamntc){
-    //     const SELECT_BY_MANUTENCAO = `
-    //     SELECT * FROM APARELHOS
-    //     WHERE STATUS = ?`
-    //     return new Promise((resolve, reject)=>{
-    //         this.bd.all(SELECT_BY_STATUS, datamntc, (error, rows)=>{
-    //             if(error){
-    //                 reject({
-    //                     "mensagem" : error.message,
-    //                     "erro" : true 
-    //                 })
-    //             } else {
-    //                 resolve({
-    //                     "requisicao" : rows,
-    //                     "erro" : false 
-    //                 })
-    //             }
-    //         })
-    //     })
-    // }
-    //fim da selecao manutencao
+    // aqui eu faço a seleção por manutencao
+    pegaAparelhoManutencao(){
+        const SELECT_BY_MANUTENCAO = `
+        SELECT ID, NOME, (Cast ((
+            JulianDay('now') - JulianDay(DATAMNTC)
+        ) As Integer) /(365/12)) AS CONSULTA_MNTC
+        FROM APARELHOS
+        WHERE CONSULTA_MNTC >= 6 `
+        return new Promise((resolve, reject)=>{
+            this.bd.all(SELECT_BY_MANUTENCAO, (error, rows)=>{
+                if(error){
+                    reject({
+                        "mensagem" : error.message,
+                        "erro" : true 
+                    })
+                } else {
+                    resolve({
+                        "requisicao" : rows,
+                        "erro" : false 
+                    })
+                }
+            })
+        })
+    }
+    // fim da selecao manutencao
     
     pegaAparelhoPorId(id){
         const SELECT_BY_ID = `
@@ -96,10 +99,47 @@ class AparelhosDAO{
         })
     }
 
+    pegaAparelhoPorFuncao(funcao){
+        const SELECT_BY_FUNCAO = `
+        SELECT ID, NOME, FUNCAO FROM APARELHOS`
+        return new Promise((resolve, reject)=>{
+            this.bd.all(SELECT_BY_FUNCAO, (error, rows)=>{
+                if(error){
+                    reject({
+                        "mensagem" : error.message,
+                        "erro" : true 
+                    })
+                } else {
+                    let result = []
+
+                    for (let i=0; i<rows.length;i++){
+                        const data = rows[i].FUNCAO.split(",")
+
+                        function filterFunction(query) {
+                            return data.filter(function (el) {
+                              return el.indexOf(query) > 1 || el.indexOf(query) > -1 ;
+                            });
+                          }
+                        
+                        if (filterFunction(funcao) != false) {
+                                    
+                            result.push(rows[i])
+
+                        }
+
+                    }
+                    resolve({
+                        "requisicao" : result,
+                        "erro" : false 
+                    })
+                }
+            })
+        })
+    }
+
     async deletaAparelho(id){
         try {
             const aparelhos = await this.pegaAparelhoPorId(id)
-            console.log(aparelhos, aparelhos.requisicao.length)
             if(aparelhos.requisicao.length){
                 const DELETE = `
                 DELETE FROM APARELHOS

@@ -1,7 +1,7 @@
 const moment = require ('moment')
 var id = 0
 
-class Aparelhos {
+class AparelhosAlt {
     constructor(nome, modelo, marca, dimensoes, pesomax, funcao, acessorios, datamntc, tecmntc){
 
             this.nome = nome
@@ -9,7 +9,7 @@ class Aparelhos {
             this.marca = marca
             this.dimensoes = dimensoes
             this.pesomax = pesomax
-            this.funcao = Aparelhos._validaFuncao(funcao)
+            this.funcao = AparelhosAlt._validaFuncao(funcao)
             this.acessorios = acessorios
             this.datamntc = moment(datamntc).format("YYYY-MM-DD")
             this.tecmntc = tecmntc
@@ -19,10 +19,12 @@ class Aparelhos {
 
         static _validaFuncao(funcao){
         const data = funcao.split(",")
+        console.log(data);
         const funcoesValidas = ["superior", "inferior", "aeróbico"]
         let result = ''
-        for (let i=0; i<(data.length); i++){
+        for (let i=0; i<(data.length -1); i++){
             if(funcoesValidas.indexOf(data[i]) > -1){
+                console.log(i);
                 result+= `${data[i]},`
             } else {
                 throw new Error("A função dever ser igual a: superior, inferior, aeróbico")
@@ -33,4 +35,4 @@ class Aparelhos {
 
     
 }
-module.exports = Aparelhos
+module.exports = AparelhosAlt
