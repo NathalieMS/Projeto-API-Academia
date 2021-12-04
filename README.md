@@ -47,6 +47,10 @@ A API foi construídas para fins didáticos, como fechamento do Módulo 4 da Res
   ## Home Page:
   
 https://github.com/NathalieMS/Projeto-API-Academia
+
+  ## Heroku:
+
+https://api-academia-aparelhos.herokuapp.com/
   
   ## Instalação Necessária
   
