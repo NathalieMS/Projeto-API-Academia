@@ -30,6 +30,7 @@ A API foi construídas para fins didáticos, como fechamento do Módulo 4 da Res
 ## Dependências Gerais:
 ```js
  "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "moment": "^2.29.1",
     "sqlite3": "^5.0.2"
