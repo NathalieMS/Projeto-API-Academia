@@ -19,12 +19,10 @@ class AparelhosAlt {
 
         static _validaFuncao(funcao){
         const data = funcao.split(",")
-        console.log(data);
         const funcoesValidas = ["superior", "inferior", "aeróbico"]
         let result = ''
         for (let i=0; i<(data.length -1); i++){
             if(funcoesValidas.indexOf(data[i]) > -1){
-                console.log(i);
                 result+= `${data[i]},`
             } else {
                 throw new Error("A função dever ser igual a: superior, inferior, aeróbico")

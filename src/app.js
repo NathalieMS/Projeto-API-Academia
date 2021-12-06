@@ -9,7 +9,6 @@ const aparelhos = require('../src/controller/aparelhos-controller')
 // Middlewares
 app.use(express.json())
 app.use((req, res, next)=>{
-    console.log("Rodei o middleware")
     next()
   })
 
