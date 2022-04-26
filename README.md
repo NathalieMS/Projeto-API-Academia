@@ -21,7 +21,7 @@ A API foi construídas para fins didáticos, como fechamento do Módulo 4 da Res
 | ------ | ----- | ----------- |
 | **GET** | `/aparelhos` | Gets em todos|
 | **GET** | `/aparelhos/{id}` | Gets nos aparelhos por {id} |
-| **GET** | `/manutencao/aparelhos` | Gets nos aparelhos que estão sem manutenção há mais de 6 meses |
+| **GET** | `/manutencao/aparelhos` | Gets nos aparelhos que estão sem manutenção a mais de 6 meses |
 | **GET** | `/aparelhos/busca/{funcao}` | Gets nos aparelhos por função já pré-estabelecida |
 | **POST** | `/aparelhos` | Entrada de novo aparelho |
 | **PUT** | `/aparelhos/{id}` | Alterações por {id} |
